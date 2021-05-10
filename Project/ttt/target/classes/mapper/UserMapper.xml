@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.zyx.demo.dao.UserDao">
+    <select id="selectAllUser" resultType="com.example.zyx.demo.mapper.User" >
+        select * from user
+    </select>
+    <delete id="deleteUser" >
+        delete from USER where id=#{id}
+    </delete>
+    <insert id="insertUser" parameterType="com.example.zyx.demo.mapper.User">
+        insert into user(id,name,sex) values (#{id},#{name},#{sex})
+    </insert>
+    <update id="updateUser" parameterType="com.example.zyx.demo.mapper.User">
+        update user set name=#{name},sex=#{sex} where id=#{id}
+    </update>
+</mapper>

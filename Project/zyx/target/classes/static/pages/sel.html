@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>查询测试</title>
+</head>
+<body>
+<div>
+    <input type="button" value="查询" onclick="bb()"/>
+    <input type="button" value="新增" onclick="add()"/>
+    <table class="class" id="table"></table>
+
+</div>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#delModal">删除</button>
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+    <body>
+<div class="main">
+    <div class="form_1">
+        <form >
+           <hr>
+            <div>delete</div>
+            <input id="delid" type="text" name="delid"  placeholder="&nbsp;id">
+            <input type="button" value="删除"  onclick="del()">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" onclick="del()">提交</button>
+        </form>
+    </div>
+</div>
+    </body>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</div>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#upModal">更新</button>
+<div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+<body>
+<div class="main">
+    <div class="form_2">
+        <form >
+            <hr>
+            <div>updata</div>
+            <input type="text" id="dataid" name="dataid" placeholder="&nbsp;id">
+            <input type="text" id="dataname" name="dataname" placeholder="&nbsp;name">
+            <input type="text" id="datasex" name="datasex" placeholder="&nbsp;sex">
+          </div>
+    <input type="button" value="提&nbsp;交" onclick="updata()">
+        </form>
+    </div>
+</div>
+</body>
+        </div></div></div>
+<script>
+    function bb() {
+/**
+        $.ajax({
+            url: "http://localhost:8080/selectusers",
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function xx(data) {
+                console.log(data)
+
+            }
+        })
+ */
+    //定义表格 初始化对象
+var initObj={
+        url: 'http://localhost:8080/selectusers',   //datalist 即为需要的数据
+        toolbar:'#toolbar',
+        dataType:'json',
+        columns: [
+            {
+                field: 'id',
+                title: 'id',
+                width: 120,
+                align: 'center',
+                valign: 'middle',
+            },
+            {
+                field: 'name',
+                title: '姓名',
+                width: 120,
+                align: 'center',
+                valign: 'middle',
+            },
+            {
+                field: 'sex',
+                title: '性别',
+                width: 120,
+                align: 'center',
+                valign: 'middle',
+            }
+        ]
+    }
+
+   //     initObj.data=[{aa:111,bb:222},{aa:444,bb:5555}];
+$('#table').bootstrapTable(initObj);
+
+
+
+      /**  var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+        var TableInit=function (){
+            var oTableInit =new Object();
+            oTableInit.Init=function (){
+                $('#table').bootstrapTable({
+                    url: 'http://localhost:8080/selectusers',
+                    method: 'post',
+                    dataType: 'json',
+                    toolbar: '#toolbar',
+                    columns:
+
+            })
+        }
+
+
+        }
+    */
+
+    }
+function add(){
+    $.ajax({
+        url: "http://localhost:8080/add",
+        type: "post",
+        data: JSON.stringify({id:13,name:"哈哈",sex:"中性"}),
+        dataType: "json",
+        Accept: "application/json, text/plain,",
+        contentType: "application/json;charset-UTF-8",
+
+        success: function xx(data) {
+            console.log(data)
+
+        }
+    })
+}
+    function del(){
+        var datadel =document.getElementById("delid").value
+       // var datadel = $("#delid");
+        alert(datadel);
+        $.ajax({
+            url: "http://localhost:8080/delete",
+            type: "post",
+            data: JSON.stringify(datadel),
+            dataType: "json",
+            Accept: "application/json, text/plain,",
+            contentType: "application/json;charset-UTF-8",
+        })
+    }
+    function updata(){
+        var dataid1 =document.getElementById("dataid").value
+        var dataname1=document.getElementById("dataname").value
+        var datasex1=document.getElementById("datasex").value
+
+        $.ajax({
+            url: "http://localhost:8080/update",
+            type: "post",
+            data: JSON.stringify({id:dataid1,name:dataname1,sex:datasex1}),
+            dataType: "json",
+            Accept: "application/json, text/plain,",
+            contentType: "application/json;charset-UTF-8",
+            success: function xx() {
+                console.log("sssss")
+            }
+    })
+    }
+</script>
+
+
+</body>
+</html>

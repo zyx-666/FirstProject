@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="arrow" >
+        <input type="text" id="search"/>
+
+        <button type="button" id="butto">
+            搜 索
+        </button>
+        <table border="1" id="table">
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>性别</th>
+            </tr>
+        </table>
+</div>
+<script>
+    document.getElementById(table).data=dateajax
+    $.ajax({
+        url: "http://localhost:8080/select.do”
+        type:post,
+            data:{ },
+		dataType:"json",
+		success:function xx( data11 ){
+            //data11是服务器返回的数据 ，如果是json字符串,会自动转换成相应的js对象   （相当于reqTXT对象）responseText;
+
+            xxxx;
+        }
+
+    })
+</script>
+</body>
+</html>
